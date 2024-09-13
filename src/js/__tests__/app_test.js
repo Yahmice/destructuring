@@ -27,17 +27,13 @@ describe('func test', () => {
 
 		const expected = [
 			{
-				id: 8,
-				icon: 'http://...',
-				description: 'Двойной выстрел наносит двойной урон'
-			},
-			{
 				id: 9,
 				icon: 'http://...',
 				description: 'Описание недоступно'
 			}
 		];
 
-		expect(extractInfo(character)).toEqual(expected);
+		const searchObject = { id: 9 };
+		expect(extractInfo(character.special, searchObject)).toEqual(expected);
 	})
 })

@@ -21,14 +21,36 @@ const character = {
   ]	
 }
 
-function extractInfo() {
-  return character.special.map(({ id, icon, description }) => ({
-    id,
-    icon,
-    description: description || "Описание недоступно"
-  }))
-};
+function extractInfo(array, searchObject) {
+  const result = [];
+  
+  for (let i = 0; i < array.length; i++) {
+    const item = array[i];
+    
+    // Проверка через переменную
+    let match = true;
+    for (const key in searchObject) {
+      if (item[key] !== searchObject[key]) {
+        match = false;
+        break;
+      }
+    }
 
-console.log(extractInfo());
+    // Если соответствует
+    if (match) {
+      result.push({
+        id: item.id,
+        icon: item.icon,
+        description: item.description || 'Описание недоступно'
+      });
+    }
+  }
+  
+  return result;
+}
+
+
+const searchObject = { id: 9 }; // Любой параметр
+console.log(extractInfo(character.special, searchObject));
 
 export default extractInfo;
